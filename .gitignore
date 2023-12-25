@@ -5,7 +5,6 @@ test.py
 resources/img/
 resources/avatar_template/
 resources/words.txt
-README.md
 __pycache__/
 utils/__pycache__/
 modules/__pycache__/
