@@ -1,4 +1,12 @@
-from modules.cards import emojicard, likecard, topiccard, usercard, wccard, postcard, card
+from modules.cards import (
+    emojicard,
+    likecard,
+    topiccard,
+    usercard,
+    wccard,
+    postcard,
+    card,
+)
 
 Card = card.Card
 EmojiCard = emojicard.EmojiCard
@@ -17,4 +25,20 @@ Postdata = postcard.Postdata
 GAP = card.GAP
 EDGE = card.EDGE
 
-__all__ = ['Card', 'EmojiCard', 'LikeCard', 'TopicCard', 'UserCard', 'WCcard', 'PostCard', 'EmojiCard', 'Emojidata', 'Likedata', 'Topicdata', 'WCdata', 'Postdata', 'GAP', 'EDGE']
+__all__ = [
+    "Card",
+    "EmojiCard",
+    "LikeCard",
+    "TopicCard",
+    "UserCard",
+    "WCcard",
+    "PostCard",
+    "EmojiCard",
+    "Emojidata",
+    "Likedata",
+    "Topicdata",
+    "WCdata",
+    "Postdata",
+    "GAP",
+    "EDGE",
+]

@@ -1,40 +1,23 @@
-from ui.app import App
-from os import fspath
-from flet import Page, Theme, app
-from utils.constant import FONT_PATH
+from pathlib import Path
+from client import Client
+import time
+from utils import read_cookie
 
 
-def main(page: Page):
-    def window_event(e):
-        if e.data == "close":
-            print('close')
-            page.views.clear()
-            try:
-                if app.client.driver.service.process.returncode == None:
-                    print('driver process exit')
-                    app.client.driver.quit()
-            except: pass
-            page.window_destroy()
-    page.title = 'Shuiyuan Annual Report Generator'
-    # page.padding = 0
-    page.window_height = 400
-    page.window_width = 400
-    page.fonts = {
-        'msyh': fspath(FONT_PATH.joinpath('msyh.ttc')),
-    }
-
-    page.theme = Theme(font_family="msyh")
-    page.window_center()
-    app = App(page)
-    page.add(app)
-    page.update()
-    app.initialize()
-    page.window_prevent_close = True
-    page.on_window_event = window_event
-
-# flet==0.14.0
-# flet_core\page.py:470 ctrl.page = None 改为 if ctrl.page != self: ctrl.page = None
-# 'https://github.com/flet-dev/examples/issues/102'
 if __name__ == "__main__":
-    app(target=main)
+    username = input("username: ")
+    default_year = int(time.strftime("%Y", time.localtime())) - 1
+    flag = input(f"year: {default_year} (y/n): ")
+    if flag.lower() == "y":
+        year = default_year
+    else:
+        year = int(input("year(例: 2024 请输入 24): ")) + 2000
+        if 20 > year or year > default_year:
+            raise ValueError(f"年份输入错误, 20 <= input <= {default_year - 2000}")
 
+    client = Client(username, year)
+    cookie = read_cookie(Path.cwd().joinpath("cookie.txt"))
+    header = client.save_cookie(cookie)
+    username, name = client.get_main_user()
+    print(f"用户名: {username}, 名字: {name}")
+    client.generate_report(year)
