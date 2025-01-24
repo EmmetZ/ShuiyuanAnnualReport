@@ -78,8 +78,6 @@ def extract(text: str):
             seg_list = jieba.lcut(tmp, cut_all=False)
             string = " ".join(seg_list)
             result += string
-    with BASE_FILEPATH.joinpath("resources", "words.txt").open(
-        "a", encoding="utf-8"
-    ) as f:
+    with WORD_PATH.open("a", encoding="utf-8") as f:
         f.write("\n")
         f.write(result)

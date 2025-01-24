@@ -9,3 +9,6 @@ run:
 
 get-emoji:
     ~/Code/python/ShuiyuanAnnualReport/.venv/bin/python ~/Code/python/ShuiyuanAnnualReport/get_custom_emoji.py
+
+clean:
+    fd -t d -g -I "**pycache**" -x rm -r {}
